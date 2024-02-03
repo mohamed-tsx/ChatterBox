@@ -1,7 +1,16 @@
+import { Route, Routes } from "react-router-dom";
+import Home from "./Pages/Home";
+import Header from "./Components/Header";
+import SignIn from "./Pages/Login";
+
 const App = () => {
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <h1 className="text-3xl font-semibold">STARTED THE PROJECT...</h1>
+    <div className="">
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="login" element={<SignIn />} />
+      </Routes>
     </div>
   );
 };
