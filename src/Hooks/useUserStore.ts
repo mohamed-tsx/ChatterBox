@@ -1,5 +1,6 @@
 import { User } from "firebase/auth";
 import { create } from "zustand";
+import { devtools, persist } from "zustand/middleware";
 
 type StoreType = {
   currentUser: User | undefined | null;
@@ -15,10 +16,17 @@ type RoomType = {
   setRoom: (room: string) => void; // Adjust the type of the argument
 };
 
-export const room = create<RoomType>((set) => ({
-  currentRoom: null,
-  setRoom: (room) => set({ currentRoom: room }),
-}));
+export const room = create<RoomType>()(
+  devtools(
+    persist(
+      (set) => ({
+        currentRoom: null,
+        setRoom: (room) => set({ currentRoom: room }),
+      }),
+      { name: "room" }
+    )
+  )
+);
 
 export const useUserStore = create<StoreType>((set) => ({
   currentUser: undefined,
