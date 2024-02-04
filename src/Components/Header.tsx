@@ -13,7 +13,6 @@ const Header = () => {
     firebaseAuth.signOut();
   };
 
-  console.log(currentUser);
   return (
     <header className="">
       <div className="flex justify-between items-center max-w-6xl mx-auto p-5">

@@ -6,12 +6,12 @@ import { onAuthStateChanged } from "firebase/auth";
 import { firebaseAuth } from "./Firebase/firebase";
 import { useUserStore } from "./Hooks/useUserStore";
 import { useEffect } from "react";
+import Chat from "./Pages/chat";
 
 const App = () => {
   const { setCurrentUser } = useUserStore();
   useEffect(() => {
     onAuthStateChanged(firebaseAuth, (user) => {
-      console.log("Auth state changed");
       setCurrentUser(user);
     });
   }, []);
@@ -20,7 +20,8 @@ const App = () => {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="login" element={<SignIn />} />
+        <Route path="/login" element={<SignIn />} />
+        <Route path="/chat" element={<Chat />} />
       </Routes>
     </div>
   );

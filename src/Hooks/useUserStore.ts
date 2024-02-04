@@ -10,6 +10,15 @@ type StoreType = {
 const initialState = {
   currentUser: null,
 };
+type RoomType = {
+  currentRoom: null | undefined | string;
+  setRoom: (room: string) => void; // Adjust the type of the argument
+};
+
+export const room = create<RoomType>((set) => ({
+  currentRoom: null,
+  setRoom: (room) => set({ currentRoom: room }),
+}));
 
 export const useUserStore = create<StoreType>((set) => ({
   currentUser: undefined,
