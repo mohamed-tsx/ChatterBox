@@ -1,6 +1,7 @@
 import { BsGithub } from "react-icons/bs";
 import { GrGoogle } from "react-icons/gr";
 import { firebaseAuth } from "../Firebase/firebase";
+import { useNavigate } from "react-router-dom";
 import {
   AuthProvider,
   GithubAuthProvider,
@@ -10,20 +11,12 @@ import {
 import { useUserStore } from "../Hooks/useUserStore";
 
 const OAuth = () => {
+  const navigate = useNavigate();
   const { currentUser } = useUserStore();
   const handleGithubAuthClick = (Provider: AuthProvider) => {
-    signInWithPopup(firebaseAuth, Provider);
-    console.log(currentUser);
-
-    console.log("OAuth button of Github got clicked");
-  };
-
-  const handleGoogleAuthClick = (Provider: AuthProvider) => {
-    // Implement OAuth logic here
     signInWithPopup(firebaseAuth, Provider)
       .then(() => {
-        console.log("Signed In! ✅");
-        console.log(currentUser);
+        navigate("/");
       })
       .catch(() => {
         console.log(`Something went wrong`);
@@ -31,8 +24,26 @@ const OAuth = () => {
       .finally(() => {
         console.log(false);
       });
+    if (currentUser) {
+      navigate("/");
+    }
+  };
 
-    console.log("OAuth button of Github got clicked");
+  const handleGoogleAuthClick = (Provider: AuthProvider) => {
+    // Implement OAuth logic here
+    signInWithPopup(firebaseAuth, Provider)
+      .then(() => {
+        navigate("/");
+      })
+      .catch(() => {
+        console.log(`Something went wrong`);
+      })
+      .finally(() => {
+        console.log(false);
+      });
+    if (currentUser) {
+      navigate("/");
+    }
   };
 
   return (
